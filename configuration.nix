@@ -18,10 +18,10 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/vda"; # or "nodev" for efi only
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "Pequod"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -32,11 +32,11 @@
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "uk";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -54,31 +54,50 @@
   # Enable sound.
   # hardware.pulseaudio.enable = true;
   # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
-  # };
+  users.users.ahab= {
+    isNormalUser = true;
+    initialPassword = "password";
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
     git
+    wget
+    htop
+    neofetch
+    rsync
+    librewolf
+    libreoffice
+    zathura
+    ranger
+    feh
+    tor-browser
+    dbeaver-bin
+    filezilla
+    doas
+    calcurse
+    android-file-transfer
+    glade
+    wofi
+    grim
   ];
-
+  # enable sway window manager
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
